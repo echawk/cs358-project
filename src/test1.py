@@ -25,20 +25,39 @@ def score(INnode, Preferences):
 
   if nodetype == 1: #Sattelite Scoring
       print("This is a satellite")
+<<<<<<< Updated upstream
       if INnode["status"] == "dead":
           scoreval = scoreval - 100
 
     #check status if alive give x if dead give -1000000
+=======
+      if INnode["status"] == "dead": #if station is dead give -100 score
+        scoreval = scoreval - 100
+      if INnode["country"] == "Russia": #if station is dead give -100 score
+        scoreval = scoreval - 100
+
+
+>>>>>>> Stashed changes
     #check countries
     #check pass
 
   elif nodetype == 2: #Station Scoring
     print("This is a station")
+<<<<<<< Updated upstream
     #check status if alive give x if dead give -1000000
 
 
   print("The score of this node is ",scoreval)
 
+=======
+    if INnode["status"] == "dead": #if station is dead give -100 score
+      scoreval = scoreval - 100
+
+
+
+  print("The score of this node is ",scoreval)
+  return scoreval
+>>>>>>> Stashed changes
 
 #NOI = 1#command to take an individual node (sattelite or station) from the list and turn it into Node of interest
 satellite = satellitelist.json()

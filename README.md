@@ -16,7 +16,13 @@ While this project is not meant to program the algorithms for such specific conn
 
 #
 
-## How to Use
+## How it Works
 
-Instructions will be added here at a future date...
+1. The satellite creates a list of ground stations and utilizes a sigmoid function, which is determined from a list of preferences given to the satellite owner, to establish its priority for each ground station. 
 
+2. This list of ground stations, created by the satellite, is then randomized (so as to eliminate any other biases) and sent to all ground stations which are capable of communicating with the satellite in question. Each ground station uses this list to compile its own list of satellites which it can communicate with. Like the list from the satellite, this list will also use a sigmoid function in order to calculate its own preferences of each satellite. Factors that may influence the sigmoid function of the list of satellites consist of, but are not limited to, ...
+a.) The predicted strengh/reliability of communication between the satellite and the ground station
+b.) The country of origin of the satellite
+c.) The satellite's own sigmoid result (preference) of the ground station
+
+3. The first satellite to reach the ground station's sigmoid result threshold is then set on the schedule, and the process repeats for other times. 

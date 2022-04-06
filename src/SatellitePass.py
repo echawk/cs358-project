@@ -2,55 +2,62 @@ import requests
 import json
 import ephem # USE THIS in terminal TO IMPORT EPHEM python -m pip install ephem
 
-# var names
-downlink_low = 0 #low end of the transmitter freq range
-downlink_high = 0 #high end of the transmitter freq range
-station_low = 0 #low end of the station freq range
-station_high = 0 #high end of the station freq range
-sLat = 0 #station Latitude
-sLong = 0 #station Longitude
+class Station (object):
+
+    def __init__(self, sLat, sLong, sAlt, station_id):
+        self.sAlt = sAlt
+        self.sLat = sLat
+        self.sLong = sLong
+        self.station_id = station_id
+        self.SNCbal = 100
+
+class Pass (object):
+
+    def __init__(self, ID, AOSt, LOSt, AOSd, TCAd, LOSd, Sperc):
+       self.ID = ID
+       self.AOSt = AOSt
+       self.AOSd = AOSd
+       self.TCAd = TCAd
+       self.LOSt = LOSt
+       self.LOSd = LOSd
+       self.Sperc = Sperc
 
 # Functions
-def TrashSatellite():
-    print("satellite is invalid")
+def Schedule(List, StartT, EndT): #function to schedule the given Pass List in the allowed time period
+    SchedList = []
+    SchedNum = 0
+    CurrSat = List[0]
 
-def create_observer(lat, lon, alt, min_riseset=0.0):
-    '''
-    Create an observer instance.
-    '''
-    # pylint: disable=assigning-non-slot
-    observer = ephem.Observer()
-    observer.lat = str(lat)
-    observer.lon = str(lon)
-    observer.elevation = alt
-    observer.horizon = str(min_riseset)
+    #THIS IS WHERE THE PRIORITIES OF THE STATION OWNER IS INPUTTED
+    #(this example is only prioritizing success rate)
 
-    return observer
+    for x in range(1,len(List)):
+        CompSat = List[x]
+        if CompSat.Sperc > CurrSat.Sperc:
+            CurrSat = CompSat
 
+    print('After considering', len(List), 'sattelites, scheduling pass of sattelite ID(s): ', CurrSat.ID)
+    #print('After considering', len(List), 'sattelites, scheduling pass of sattelite ID(s): ', len(SchedList))
+    return
 
-def FindPasses(satellite, observer, tmin, tmax, minimum_altitude, min_pass_duration):
-    passes = []
-
-    sat_ephem = ephem.readtle(str(satellite.tle0))
-
-    #set start time
-    # observer.date = ephem.date(tmin)
+def GetPasses(Station, StartT, EndT, minimum_altitude, min_pass_duration):
+    a = 0
+    return
 
 
-# Find passes
-#print('Finding all passes for %s satellites:' % len(satellites))
+################
+## MAIN
+################
 
-Station =create_observer(0, 0, 200, min_riseset=0.0)
-FindPasses(sattelite, Station, tmin, tmax, minimum_altitude, min_pass_duration)
+#Set up Stations and Passes
+S1 = Station(41.462,-87.038,240,834) #VALPO STATION INFO EXAMPLE
+P1 = Pass(99477, 414, 425, 203, 17, 331, 56.48) #example pass from online pass predictor
+P2 = Pass(39430, 415, 428, 31, 14, 145, 63.31) #example pass from online pass predictor
+P3 = Pass(47963, 418, 430, 25, 24, 165, 45.33) #example pass from online pass predictor
+P4 = Pass(28654, 419, 434, 196, 26, 335, 97.77)
+P5 = Pass(47945, 422, 433, 22, 29, 170, 79.06)
+P6 = Pass(43792, 426, 437, 207, 15, 329, 52.11)
+P7 = Pass(43793, 435, 442, 208, 15, 329, 78.49)
 
-#loop over all passes
-# is the satellite above the horizon (aka during a pass) at this time?
-# is the transmitter frequency (`downlink_*`) within the frequency range of the antenna(s)?
-
-#LOOP though all of the passes found using the following criteria
-SatTLE = 0 #satellite position prediction
-if downlink_low < station_low:
-    TrashSatellite()
-if downlink_high > station_high:
-    TrashSatellite()
-#check if the sattelite pass is ABOVE the horizon
+PassList = [P1, P2, P3, P4, P5, P6, P7]
+Schedule(PassList, 414, 443)

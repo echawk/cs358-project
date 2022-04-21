@@ -1,5 +1,7 @@
 import requests
 import json
+import sqlite3;
+import pandas as pd
 import ephem # USE THIS in terminal TO IMPORT EPHEM python -m pip install ephem
 
 class Station (object):
@@ -50,6 +52,18 @@ def GetPasses(Station, StartT, EndT, minimum_altitude, min_pass_duration):
 ################
 
 #Set up Stations and Passes
+
+
+sats = sqlite3.connect("C:\\Users\\Yogif\\OneDrive\\Desktop\\Homework\\CS 358\\satdata\\passes.sqlite\\passes.sqlite")
+
+sc = sats.cursor()
+#print(sc.execute('SELECT name FROM sqlite_schema WHERE type=\'table\' AND name NOT LIKE \'sqlite_%\';'))
+
+for row in sc.execute('SELECT * FROM passes;'):
+    print(row)
+
+#print(df.head())
+
 S1 = Station(41.462,-87.038,240,834) #VALPO STATION INFO EXAMPLE
 P1 = Pass(99477, 414, 425, 203, 17, 331, 56.48) #example pass from online pass predictor
 P2 = Pass(39430, 415, 428, 31, 14, 145, 63.31) #example pass from online pass predictor

@@ -40,6 +40,25 @@ def Schedule(List, StartT, EndT): #function to schedule the given Pass List in t
             if EndT >= CompSat[1]: #only enters if the end of pass is before the specified end time frame
                 numconsidered = numconsidered+1 #this code runs whenever a sat is being considered
                 if LST < CompSat[0]: #if the last considered time is before the start time
+                   ###########################################################################
+                   ##THIS IS WHERE THE SPECIFIC STATION PREFERENCES ARE ADDED
+                   ##there have been a few provided examples of what priorities can be added
+                   ###########################################################################
+                   # this example checks if the sattelite is to the WEST of the ground station
+                   # (can be used if there is a physical restriction making sats to the east unreadable)
+                   #
+                   #
+                   # this example checks if the duration of the pass is over 600 seconds long
+                   # (can be used if short passes do not want to be considered)
+                   #
+                   #
+                   # this example only considers sattelites that are below limit_elevation height
+                   # (can be used if the ground station can not accurately read sats above a certain elevation)
+                   #
+                   #
+                   ###########################################################################
+                    
+                    #this scedules the currently considered sattelite (currently sceduling if it fits within schedule)
                     SchedList.append(CompSat)
                     SchedNum = SchedNum+1
                     LST = CompSat[1]

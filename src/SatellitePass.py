@@ -3,6 +3,7 @@ import json
 import sqlite3;
 import pandas as pd
 import ephem # USE THIS in terminal TO IMPORT EPHEM python -m pip install ephem
+import csv
 
 class Station (object):
 
@@ -87,5 +88,13 @@ for pass_ in PassList:
 InStartTime = '2018-09-12 07:22:40.080409'
 InEndTime = '2018-09-13 21:51:21.865953'
 FinSc = Schedule(PassList, InStartTime, InEndTime)
+
+#Testing
+#for y in range(len(FinSc)):
+#    print(FinSc[y])
+
+#Write to CSV
+file = open('schedule.csv', 'w') #Opens file in write mode
+writer = csv.writer(file)
 for y in range(len(FinSc)):
-    print(FinSc[y])
+    writer.writerow(FinSc[y])

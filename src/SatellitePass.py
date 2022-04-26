@@ -98,3 +98,4 @@ file = open('schedule.csv', 'w') #Opens file in write mode
 writer = csv.writer(file)
 for y in range(len(FinSc)):
     writer.writerow(FinSc[y])
+file.close()

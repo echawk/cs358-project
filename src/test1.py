@@ -1,68 +1,29 @@
-import requests
-import json
-
-defaultPref = 0
-null = 0
+import datetime
+import time
 
 
-stationlist = requests.get("https://db.satnogs.org/api/transmitters/")
-satellitelist = requests.get("https://db.satnogs.org/api/satellites/")
-print(stationlist.status_code)
-print(satellitelist.status_code)
-#print(stationlist.json())
-#print(satellitelist.json())
-
-def score(INnode, Preferences):
-  scoreval = 0 #value of the node
-  nodetype = 0 # 0 - no input 1 - satellite 2 - ground station
-  if 'mode' in INnode: #if it is a station
-    nodetype = 2
-  else: #if it is a satellite
-    nodetype = 1
-  if Preferences == 0: #if the preferences given is empty
-      Preferences = defaultPref #set to the default preferences
-
-
-  if nodetype == 1: #Sattelite Scoring
-      print("This is a satellite")
-<<<<<<< Updated upstream
-      if INnode["status"] == "dead":
-          scoreval = scoreval - 100
-
-    #check status if alive give x if dead give -1000000
-=======
-      if INnode["status"] == "dead": #if station is dead give -100 score
-        scoreval = scoreval - 100
-      if INnode["country"] == "Russia": #if station is dead give -100 score
-        scoreval = scoreval - 100
-
-
->>>>>>> Stashed changes
-    #check countries
-    #check pass
-
-  elif nodetype == 2: #Station Scoring
-    print("This is a station")
-<<<<<<< Updated upstream
-    #check status if alive give x if dead give -1000000
-
-
-  print("The score of this node is ",scoreval)
-
-=======
-    if INnode["status"] == "dead": #if station is dead give -100 score
-      scoreval = scoreval - 100
+def string_time_to_unix_time(input_str):
+    ymd_s, hms_s = tuple(input_str.split(" "))
+    year, month, day = tuple(ymd_s.split('-'))
+    hms_s = hms_s.split(".")[0]
+    hour, minute, second = tuple(hms_s.split(':'))
+    date_time = datetime.datetime(int(year), int(month), int(day), int(hour), int(minute), int(second))
+    print("unix_timestamp => ",(time.mktime(date_time.timetuple())))
 
 
 
-  print("The score of this node is ",scoreval)
-  return scoreval
->>>>>>> Stashed changes
+ST = '2018-09-12 07:22:40.080409'
+ET = '2018-09-13 21:51:21.865953'
 
-#NOI = 1#command to take an individual node (sattelite or station) from the list and turn it into Node of interest
-satellite = satellitelist.json()
-station = stationlist.json()
-NOI = satellite[35] #accesses the first object in the json use sat[0]["name"] for more specific
-PrefList = 0 #object containing the preferenced used in the scoring function
-score(NOI,PrefList)
+Year = ST[0:4]
+Mon = ST[5:7]
+Day = ST[8:10]
+Hour = ST[11:13]
+Min = ST[14:16]
+Sec = ST[17:19]
 
+#date_time = datetime.datetime(int(Year), int(Mon), int(Day), int(Hour), int(Min), int(Sec))
+#print("unix_timestamp => ",(time.mktime(date_time.timetuple())))
+
+
+string_time_to_unix_time(ET)

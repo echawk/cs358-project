@@ -1,12 +1,16 @@
 \documentclass{article}
 
 \author{Ethan Hawk, Nick Koeppen, Erik Petersen}
-\title{SatNOGs Bazaar Scheduler}
+\title{SatNOGs Scheduling Bazaar}
 
 \begin{document}
 
 \maketitle
 \tableofcontents
+
+\section{Acknowledgements}
+Our work for an automated SatNOGS scheduler would not have been possible without the vast guidance and assitance from Professor Nicholas S. Rosasco, DS.c., of the Valparaiso University Computer Science Department, and Professor Dan White Ph.D., of the Valparaiso University Electical Engineering Department. We would like to acknoweledge and thank them for their time and contribution of knowledge.
+
 
 \section{General Information}
 
@@ -31,6 +35,15 @@ To evaluate quality, the documentation should provide any future implementers
 and SatNOGS community members enough information, as well as coherent enough
 information to pick up where we left off. Particularly with regards to the
 implementation of this software system.
+
+
+\subsection{Future Plans}
+
+\subsubsection{Job Distributor as Abstract Entity}
+Our current implementation entails a proof-of-concept, exemplifying an automated platform for ground stations to schedule satellites via sigmoid-compiled preferences. However, when implemented, we would recommend to seperate the job scheduler role from the ground station. By having the job distributor as a more abstract entity, a bigger picture of ground station accessibility can be seen and scheduled for. For example, if a satellite cluster is hovering over Europe, which has numerous groundstations, it can be more efficiently scheduled for one-on-one communication by an abstract entity as opposed to a scheduler led by a ground station, because the seperate entity can better account for the mass of satellites and ground stations and can schedule for what relationships work best, instead of what works best for a certain ground station. Subsequently, when explaining the roles working within our scheduler in this document, we will define the system in-terms of this abstract entity. 
+
+\subsubsection{Currency to Allow for Decision Override}
+With the current implementation that SatNOGS provides, satellites have absolutely no say in how or when they are scheduled. It is entirely up to the ground station in how the satellite is manually scheduled. In our current concept, the satellite could sacrifice the quantity of communication it gets for the quality, perhaps by being not scheduled once hourly with Software-Defined-Radio equipped Raspberry Pi's and instead being scheduled once daily with high-power antenna setups. This enables the satellite to have its own say in how and when it is scheduled, even though it is not the final voice in the matter. We would recommend retaining this model, but would encourage the implementation of a 'currency' which would enable the satellite to further influence a scheduling decision, perhaps because the satellite owner requires data from the satellite in a timely fashion.
 
 \subsection{Use Case Description}
 
@@ -81,7 +94,5 @@ Inputs:
 \subsection{Test Plan}
 
 
-
-\subsection{Future Plans}
 
 \end{document}

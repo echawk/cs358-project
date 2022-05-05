@@ -34,7 +34,38 @@ implementation of this software system.
 
 \subsection{Use Case Description}
 
+\subsection{Definitions}
 
-\subsection{Client \& Server Architecture}
+\begin{itemize}
+  \item \textbf{Job} - A satellite pass over a particular groundstation
+\end{itemize}
+
+\subsubsection{Data Layout}
+
+
+\subsection{Scheduler Description}
+
+For a high level overview of the Scheduler, at it's most basic level, one can
+think of it as being a function that takes in a table of all valid potential
+satellite jobs and returns a table of ``scheduled'' jobs.
+
+\subsubsection{Scheduler Architecture}
+
+The entire scheduler system consists of 3 parts which work in tandem to produce
+a table of scheduled jobs. Which consists of the following:
+
+\begin{itemize}
+\item Job Distributor
+\item Ground Station Job Evaluator
+\item Job Aggregator
+\end{itemize}
+
+\subsubsection{Job Distributor}
+
+The job distributor is in charge of sending valid \textit{Jobs} to their
+respective \textit{groundstations} to be evaluated 
+
+\subsection{Test Plan}
+
 
 \end{document}

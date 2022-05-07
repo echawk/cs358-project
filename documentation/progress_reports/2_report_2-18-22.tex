@@ -1,0 +1,58 @@
+\documentclass{article}
+
+\usepackage{hyperref}
+
+\title{Progress Report 2\\ Satellite Observation Scheduling Simulator}
+\author{Erik, Ethan, Nick}
+
+\begin{document}
+\maketitle
+
+\section{Objectives Completed}
+
+\begin{itemize}
+	\item Initial test plan document
+	\item Idea document of initial simulator architecture
+	\item Matrix communication with SatNOGs developers
+    \begin{itemize}
+      \item Started a discussion about how devs see our project being useful
+      \item Sent initial test plan along with idea documentation
+    \end{itemize}
+	\item Tested retrieving data via SatNOGs db api
+\end{itemize}
+
+\section{Current Objectives}
+
+\begin{itemize}
+  \item Get initial framework for simulator working in python
+  \item Continue editing and refining the Test Plan
+  \item Wait for a response from the SatNOGs team
+  \item Store retrieved station and satellite data
+\end{itemize}
+
+\section{Test Document Excerpt}
+\subsection{Tests}
+\begin{itemize}
+\item Deterministic results test
+  \begin{itemize}
+  \item We want the results of our machine to be reproducible, therefore we must have a way to test that with a given set of input there should be the same outputs.
+Owner control test
+  \item We need the owner to keep control over the readings done by their station.  This test would confirm that an owner can override an already scheduled observation and schedule their own job at any time.
+  \end{itemize}
+
+\item Agreement test
+  \begin{itemize}
+  \item The only way for a change to the schedule to be made should be when there is an agreement (contract) accepted. This should test that changes only occur on that occasion.
+  \end{itemize}
+
+\item Scheduling update test
+  \begin{itemize}
+  \item A request process will be sent from a satellite to the ground station, both parties either agree or disagree on this request. Either party should then be able to modify the request until an acceptance has occurred. This test will ensure that the satellite can update their request if any details have been changed.
+Bounty test
+  \item Requests have the ability to have attached bounties within them, these bounties contain SNC (satnogs network credits). SNC is applied to base station balances and serves as a leaderboard, or can be included in new bounties. This test will ensure that when a job is completed with an attached bounty, the ground station receives the SNC into their balance.
+Client bid detection
+  \item Clients should be able to detect when there is an observation requested with a bounty attached to it.  This test will ensure that the ground station records when an offer includes SNC.
+  \end{itemize}
+\end{itemize}
+
+\end{document}

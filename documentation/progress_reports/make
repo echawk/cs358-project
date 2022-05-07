@@ -1,0 +1,14 @@
+#!/bin/sh
+
+case $1 in
+    pdf)
+        for f in *.tex; do
+            latexmk -pdf $f
+        done
+    ;;
+    clean)
+        for f in *.tex; do
+            latexmk -CA $f
+        done
+    ;;
+esac

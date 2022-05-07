@@ -40,7 +40,7 @@ implementation of this software system.
 \subsection{Future Plans}
 
 \subsubsection{Job Distributor as Abstract Entity}
-Our current implementation entails a proof-of-concept, exemplifying an automated platform for ground stations to schedule satellites via sigmoid-compiled preferences. However, when implemented, we would recommend to seperate the job scheduler role from the ground station. By having the job distributor as a more abstract entity, a bigger picture of ground station accessibility can be seen and scheduled for. For example, if a satellite cluster is hovering over Europe, which has numerous groundstations, it can be more efficiently scheduled for one-on-one communication by an abstract entity as opposed to a scheduler led by a ground station, because the seperate entity can better account for the mass of satellites and ground stations and can schedule for what relationships work best, instead of what works best for a certain ground station. Subsequently, when explaining the roles working within our scheduler in this document, we will define the system in-terms of this abstract entity. 
+Our current implementation entails a proof-of-concept, exemplifying an automated platform for ground stations to schedule satellites via sigmoid-compiled preferences. However, when implemented, we would recommend to seperate the job scheduler role from the ground station. By having the job distributor as a more abstract entity, a bigger picture of ground station accessibility can be seen and scheduled for. For example, if a satellite cluster is hovering over Europe, which has numerous groundstations, it can be more efficiently scheduled for one-on-one communication by an abstract entity as opposed to a scheduler led by a ground station, because the seperate entity can better account for the mass of satellites and ground stations and can schedule for what relationships work best, instead of what works best for a certain ground station. Subsequently, when explaining the roles working within our scheduler in this document, we will define the system in-terms of this abstract entity.
 
 \subsubsection{Currency to Allow for Decision Override}
 With the current implementation that SatNOGS provides, satellites have absolutely no say in how or when they are scheduled. It is entirely up to the ground station in how the satellite is manually scheduled. In our current concept, the satellite could sacrifice the quantity of communication it gets for the quality, perhaps by being not scheduled once hourly with Software-Defined-Radio equipped Raspberry Pi's and instead being scheduled once daily with high-power antenna setups. This enables the satellite to have its own say in how and when it is scheduled, even though it is not the final voice in the matter. We would recommend retaining this model, but would encourage the implementation of a 'currency' which would enable the satellite to further influence a scheduling decision, perhaps because the satellite owner requires data from the satellite in a timely fashion.
@@ -89,7 +89,9 @@ Inputs:
 
 \subsubsection{Ground Station Job Evaluator}
 
-
+The ground station job evaluator decides what jobs to take and what jobs to
+deny. It is simply a peice of software that reads in potential jobs, and
+decides what jobs to take based off of the groundstation owners preferences.
 
 \subsection{Test Plan}
 

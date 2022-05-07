@@ -1,0 +1,112 @@
+\documentclass{article}
+
+\usepackage{hyperref}
+
+\title{Progress Report 1\\Satellite Observation Scheduling Simulator}
+\author{Erik, Ethan, Nick}
+
+\begin{document}
+\maketitle
+
+\section{Objectives Completed}
+
+\begin{itemize}
+	\item System Overview Document
+	\item Meeting with Professor White
+	\item inital email to communicate with SatNOGs devs.
+	\item decided to use flask as web framework (may switch to django if satnogs team has resources for us)
+\end{itemize}
+
+\section{Current Objectives}
+
+\begin{itemize}
+  \item Read in data from SatNOGs website
+  \item Client-Server Architecture
+    \begin{itemize}
+      \item methods needed to interface client server
+    \end{itemize}
+  \item Bidding system ideas
+  \item Wait for Prof. White's response to the requirements document
+  \item Wait for a response from the SatNOGs team
+\end{itemize}
+
+\section{Meeting w/ Professor White}
+
+\subsection{Base station preference features}
+
+\begin{itemize}
+\item Be able to identify an obstacle specific to base station
+  \begin{itemize}
+    \item segments that are boxed out and realized as pointless (part of the preferences of the station)
+  \end{itemize}
+\item Uses a pass predictor because the network does not supply all the needed info for the station client
+  \item Pass predictor uses time, freq range and area for preference
+\end{itemize}
+
+\subsection{Pass Prediction features}
+
+\begin{itemize}
+\item Pass prediction must be above horizon
+\item Make sure that positioning is good
+\item DON'T bother listening until it is high enough \& therefore closer
+\item Can't get pass predictions via api, BUT we can use API root to ``poke at it direct''
+\end{itemize}
+
+\subsection{SatNOGs Communication}
+
+\begin{itemize}
+\item Karel - username of person we should initially reach out to
+\item Reach out to SatNOGs devs - also could use matrix channels for SatNOGs \& librespace
+\end{itemize}
+
+
+\subsection{Notes for NEW scheduler}
+
+\begin{itemize}
+\item If it fits in the base station calendar, do it!
+\item Be able to plug in any method that does fancier and fancier stuff \textbf{VERY IMPORTANT}
+\item More interested in the engine that allows us to plug in a client and behave a certain way
+\item Start with the auto scheduler, one owner, one groundstation centric
+\item Scheduler is only a part of the simulator
+\item Atuo Scheduler runs its own predictor, but you can use api to get all stations, all satellites and pass predictions for all satellites individually giving a list of all possible passes
+  \begin{itemize}
+  \item We will be delivered a database with all of that information from Prof. White
+    \item No need to run in real time
+  \end{itemize}
+\item We want to be able to auto schedle a satelite OVER MANY GROUNDSTATIONS
+\end{itemize}
+
+\subsection{APIs}
+
+In the simulator we get access to all ground stations via api, transmitters via API (satellites can have multiple transmitters)
+
+\href{db.satnogs.org/api}{db.satnogs.org/api}
+
+\href{db.satnogs.org}{db.satnogs.org} - SatNOGs database
+
+
+\subsection{Auction/Bidding System}
+
+Auction capabilites would use another plugin.
+
+
+\subsection{Questions Answered}
+
+Is tehre any potential for code reuse from previous bazaar project work?
+
+\begin{itemize}
+  \item No, previous groups were not CS groups and had very bare-bones system
+  \item Could MAYBE use datastructures but don't use more than that
+  \item Should instead start with the SatNOGs auto scheduler
+\end{itemize}
+
+What would the best case scenario for a final user interface look like?
+
+\begin{itemize}
+  \item Have a way of describing behavior and priorities, priority list for satellite owners
+  \item If we want to listen to an entire cluster we would want to organize reading all of them with N number of groundstations - Coverage of many different satellites over a certain area (hear something from all the satellites)
+  \item Doest really have a UI, allows someone to game out a set of parties in teh bazaar and run the simulation
+  \item For the same time frame and same satellites it is deterministic
+\end{itemize}
+
+\end{document}

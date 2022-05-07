@@ -1,0 +1,97 @@
+\documentclass{article}
+
+
+\title{Satellite Observation Scheduilng Simulator\\Requirements Document}
+\author{Erik, Ethan, Nick}
+\begin{document}
+\maketitle
+
+\section{Goal Statement}
+
+Currently, the SatNOGs Client component has no decision-making capability, it
+accepts all jobs assigned to it from the SatNOGs network, therefore is not a
+clear way for describing the piorities of the Network, a ground station Owner,
+or an Observer to help deal with overlaps in passes. To remain the leaders in
+the satellite databse scene, SatNOGs should \textbf{also} create, specify, and
+provide the reference implementation for the \textit{interactions} between a
+network and client. This software will serve as that implementation.
+
+\section{Definitions}
+
+\begin{itemize}
+	\item \textbf{SatNOGs} - Open source network of satellite ground stations available for use.
+	\item \textbf{SNC} - The currency of the SatNOGs network bazaar.
+	\item \textbf{Owner} - Owner of the groundstations that are collecting data.
+	\item \textbf{Client} - Person scheduling a job on SatNOGs network.
+	\item \textbf{Job} - A sinle satellite data collection.
+	\item \textbf{Request} - The message sent from a satellite owner.
+	\item \textbf{Bounty} - List of one or more \textit{key-value} pairs, containing the reward for accepting a job.
+\end{itemize}
+
+
+\section{Objectives}
+
+The device shall schedule ground station observations in a manner consistent
+with the Libre Space Manifesto.
+
+\begin{itemize}
+	\item All people have the right to access and explore technology and data.
+	\item Use of outer space shall be carried out collaboratively and cooperatively
+	\item Profit shall not be the driving force
+	\item Follows the pillars of Open Source, Open Data, Open Development, and Open Governance
+\end{itemize}
+
+\section{System Requirements}
+
+\subsection{Station Owner Autonomy}
+
+\begin{itemize}
+	\item The Owner of a set of Clients retains autonomy in determining which jobs are accepted.
+	\item The Owner also retains the ability to cancel a Job at any time before or during a pass for any reason.
+	\item An Agreement (contract) driectly between a Network and an Owner are the sole means of modifying the behavior of an Owner and associated Clients with repsect to scheduling.
+	\item An Owner is not required to completely reveal their preferences.
+\end{itemize}
+
+\subsection{Network Policies and Priorities}
+
+\begin{itemize}
+	\item The Network is not required to completely reveal its preferences to any Client.
+	\item The Network may enfoce a uniform contract across all Clients or may execute individual agreements at its sole discretion.
+\end{itemize}
+
+
+\subsection{Ownership of Data}
+
+\begin{itemize}
+	\item Data generated from Jobs is owned by the Clients Owner. The Onwer is therefore allowed to dual-license the data under different terms to separate Networks.
+	\item Only agreements between a Network and Owner shall modify ownership and licensing of received data.
+\end{itemize}
+
+\subsection{Scheduling Requirements}
+
+\begin{itemize}
+    \item A request process should happen between a Network and Client where both parties arrive (or not) at an agreement on the set of details for a requested Job.
+	\item Either side of a negotiation may respond with a modified set of details for the bid.
+	\item A Job is only considered as scheduled when one side indicates agreement via an accept response which references the Network-unique id of a specific request.
+\end{itemize}
+
+\subsection{Bounty Requirements}
+
+\begin{itemize}
+    \item Requests can include a bounty field that serves as the reward for accepting a job.
+	\item A bounty may represent real currency or be credits associated with each Network.
+	\item The Network could offer SNC or set the duration in minutes for each particular job, which would accumulate in the Owner's user account (think leaderboard statistics and ability to schedule on other stations)
+	\item Non-Owners can use SNCs to increase the offered ``bounty'' for particular requests
+	\item A Client can detect that \textit{someone} wants this particular observation when the offered SNC is larger than the pass duration, which may be useful to an Owner.
+\end{itemize}
+
+\subsection{User Interface Requirements}
+
+\begin{itemize}
+    \item The software implementing the Client enables an Owner to specify an ordered list of satellites or provide a callback function which implements a more complex local policy. This is similar to the SatNOGs auto scheduler.
+	\item The Client is responsible for only accepting a request when there is a reasonable expectation that the client will be successful, i.e. no overlaps, appropriate receiving software and hardware, available antenna, etc.
+	\item A future extension to this protocol can include a capabilities object which a Client sends to a Network as an advertisement. It would include information such as frequency ranges and receive system performance that may change with time.
+	\item Output the results with enough metadata to reproduce the results again, and the scheduled passes so later tools can compute statistics about the set.
+\end{itemize}
+
+\end{document}
